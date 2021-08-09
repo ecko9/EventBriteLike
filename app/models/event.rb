@@ -4,8 +4,8 @@ class Event < ApplicationRecord
   has_many :participations
   has_many :participants, through: :participations, class_name: "User"
 
-  validates :start_date, presence: true, :start_date_need_be_positive
-  validates :duration, presence: true, :duration_need_be_multiple_of_five_and_positive
+  validates :start_date, presence: true, if: :start_date_need_be_positive
+  validates :duration, presence: true, if: :duration_need_be_multiple_of_five_and_positive
   validates :title, presence: true, length: { in: 5..140 }
   validates :description, presence: true, length: { in: 20..1000 }
   validates :price, presence: true, numericality: { only_integer: true, less_than: 1001, greater_than: 0 }
